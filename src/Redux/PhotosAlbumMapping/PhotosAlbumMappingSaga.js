@@ -10,7 +10,13 @@ import {
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from "../../utils/axios";
 export function* onGetphotosAlbumMappingList({ payload }) {
   try {
-    const { filter, quickFilter = "", keyword = "", count = "" } = payload;
+    const {
+      filter,
+      quickFilter = "",
+      keyword = "",
+      count = "",
+      album_id = "",
+    } = payload;
 
     const sort = filter.sortBy.split("-");
 
@@ -18,7 +24,7 @@ export function* onGetphotosAlbumMappingList({ payload }) {
       filter.page
     }&filter=${keyword}&role=${quickFilter}&sort_by=${
       sort[0] ? sort[0] : ""
-    }&sort=${sort[1] ? sort[1] : ""}&count=${count}`;
+    }&sort=${sort[1] ? sort[1] : ""}&count=${count}&album_id=${album_id}`;
 
     const response = yield call(() => axiosGet(url).then((res) => res.data));
     yield put(getphotosAlbumMappingListResponse(response));

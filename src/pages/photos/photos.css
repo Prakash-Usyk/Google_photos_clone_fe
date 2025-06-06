@@ -27,3 +27,16 @@
 .timing-cls {
   margin: 15px;
 }
+.photo-gallery-wrapper {
+  padding: 20px;
+}
+
+.photo-group-block {
+  margin-bottom: 30px;
+}
+
+.photo-group-block h3 {
+  padding: 20px;
+  font-size: 18px;
+  color: #333;
+}

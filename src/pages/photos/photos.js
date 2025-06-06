@@ -3,17 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./photos.css";
 import {
+  deletephotosRequest,
+  deletephotosResponseClear,
   getphotosListRequest,
   postphotosResponseClear,
+  putphotosRequest,
+  putphotosResponseClear,
 } from "../../Redux/Photos/PhotosActions";
 import { appUrl } from "../../utils/axios";
 import toast from "react-hot-toast";
 import PhotoGallery from "../../components/ImagePreview";
+import { formatTimeGroup, groupPhotosBy15Min } from "../../utils/groupBy";
+import { useLocation } from "react-router-dom";
 
 const Photos = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
+  const location = useLocation();
   const [pagelimit, setPagelimit] = useState(10);
   const [quickFilter, setQuickFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -45,17 +52,26 @@ const Photos = () => {
   } = useSelector((state) => state.photos);
 
   useEffect(() => {
-    if (putphotosLoading || postphotosLoading) return;
+    if (putphotosLoading || postphotosLoading || deletephotosLoading) return;
 
     dispatch(
       getphotosListRequest({
         quickFilter,
         filter: { sortBy, page },
         keyword: "",
-        count: pagelimit,
+        count: "",
+        is_deleted: location?.pathname === "/trash" ? true : false,
       })
     );
-  }, [putphotosLoading, postphotosLoading, page, pagelimit, sortBy]);
+  }, [
+    putphotosLoading,
+    postphotosLoading,
+    page,
+    pagelimit,
+    sortBy,
+    deletephotosResponse,
+    location,
+  ]);
 
   useEffect(() => {
     if (!postphotosResponse) return;
@@ -66,28 +82,44 @@ const Photos = () => {
     dispatch(postphotosResponseClear());
   }, [postphotosResponse]);
 
+  useEffect(() => {
+    if (putphotosResponse?.type === "success") {
+      toast.success(putphotosResponse?.data?.message);
+    }
+    dispatch(putphotosResponseClear());
+  }, [putphotosResponse]);
+
+  const handleDelete = (id) => {
+    dispatch(putphotosRequest({ is_deleted: true }, id));
+  };
+
+  const groupedPhotos = groupPhotosBy15Min(getphotosResponse?.data?.data || []);
+  const timeGroups = Object.entries(groupedPhotos);
+
   return (
     <div className="main-content">
-      <h3>September 2023</h3>
-      <div className="timing-cls">{/* <h5>Time 15.00 - 15.15</h5> */}</div>
+      <div className="photo-gallery-wrapper">
+        {timeGroups.length > 0 ? (
+          timeGroups.map(([time, photos]) => (
+            <div key={time} className="photo-group-block">
+              <h3>{formatTimeGroup(time)}</h3>
 
-      <div className="photo-grid">
-        {getphotosResponse?.data?.data?.length > 0 ? (
-          getphotosResponse?.data?.data?.map((each, index) => {
-            return (
-              <img
-                key={index}
-                src={appUrl + each.image}
-                alt="snap"
-                onClick={() => handleImageClick(each?._id)}
-              />
-            );
-          })
+              <div className="photo-grid">
+                {photos.map((photo, index) => (
+                  <img
+                    key={photo._id}
+                    src={appUrl + photo.image}
+                    alt="snap"
+                    onClick={() => handleImageClick(photo._id)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))
         ) : (
-          <></>
+          <p>No images found.</p>
         )}
       </div>
-      {console.log(open, selectedImage, "checkingggg")}
       <PhotoGallery
         open={open}
         selectedImage={selectedImage}
@@ -96,6 +128,8 @@ const Photos = () => {
           _id: each?._id,
           image: appUrl + each.image,
         }))}
+        handleDelete={handleDelete}
+        fieldKey="_id"
       />
     </div>
   );

@@ -14,10 +14,12 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import PhotoMenu from "../model-components/header-add-model";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { postsearchRequest } from "../../Redux/SearchComp/SearchActions";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleClick = (event) => setAnchorEl(true);
   const handleClose = () => setAnchorEl(false);
@@ -57,7 +59,11 @@ const Header = () => {
       <div className="header">
         <div className="search-bar-wrapper">
           <SearchIcon className="search-icon" />
-          <input type="text" placeholder="Search your photos and albums" />
+          <input
+            type="text"
+            placeholder="Search your photos and albums"
+            onChange={(e) => dispatch(postsearchRequest(e.target.value))}
+          />
         </div>
 
         <div className="icons">

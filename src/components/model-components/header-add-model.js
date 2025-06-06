@@ -40,18 +40,6 @@ export default function PhotoMenu() {
     }
 
     dispatch(postphotosRequest(formData));
-
-    // try {
-    //   const response = await fetch("http://localhost:5000/photos", {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-
-    //   const result = await response.json();
-    //   console.log("Upload successful:", result);
-    // } catch (error) {
-    //   console.error("Upload failed:", error);
-    // }
   };
 
   const handleMenuItemClick = () => {

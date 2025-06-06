@@ -28,7 +28,7 @@ function App() {
             <Route path="/photos" element={<Photos />} />
             <Route path="/updates" element={<Photos />} />
             <Route path="/albums" element={<Albums />} />
-            <Route path="/albums/new" element={<AlbumForm />} />
+            <Route path="/albums/:mode/:id?" element={<AlbumForm />} />
             <Route path="/documents" element={<Photos />} />
             <Route path="/favourites" element={<Photos />} />
             <Route path="/people" element={<Photos />} />

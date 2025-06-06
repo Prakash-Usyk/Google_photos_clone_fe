@@ -8,7 +8,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-function PhotoGallery({ open, handleClose, selectedImage, images = [] }) {
+function PhotoGallery({
+  open,
+  handleClose,
+  selectedImage,
+  images = [],
+  handleDelete,
+  fieldKey,
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -71,7 +78,9 @@ function PhotoGallery({ open, handleClose, selectedImage, images = [] }) {
             </Tooltip>
             <Tooltip title="Delete">
               <IconButton sx={{ color: "white" }}>
-                <DeleteIcon />
+                <DeleteIcon
+                  onClick={() => handleDelete(images[currentIndex]?.[fieldKey])}
+                />
               </IconButton>
             </Tooltip>
             <Tooltip title="More">

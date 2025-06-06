@@ -19,7 +19,6 @@ const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
 
-  console.log(currentPath, "params");
   const navigate = useNavigate();
   return (
     <aside className="sidebar">

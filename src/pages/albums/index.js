@@ -4,16 +4,11 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getalbumsListRequest } from "../../Redux/Albums/AlbumsActions";
-
-const albums = [
-  {
-    id: "1",
-    name: "a1",
-    description: "1 item",
-    thumbnail: "",
-  },
-];
+import {
+  getalbumsByIdRequest,
+  getalbumsListRequest,
+} from "../../Redux/Albums/AlbumsActions";
+import { appUrl } from "../../utils/axios";
 
 const Albums = () => {
   const navigate = useNavigate();
@@ -22,8 +17,8 @@ const Albums = () => {
   const [pagelimit, setPagelimit] = useState(10);
   const [quickFilter, setQuickFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
-
   const [albumstate, setalbumstate] = useState("all");
+  const [selectedAlbum, setselectedAlbum] = useState("");
 
   const {
     getalbumsLoading,
@@ -38,6 +33,10 @@ const Albums = () => {
     deletealbumsResponse,
   } = useSelector((state) => state.albums);
 
+  const { getsearchResponse, postsearchResponse } = useSelector(
+    (state) => state.search
+  );
+
   useEffect(() => {
     if (putalbumsLoading || postalbumsLoading) return;
 
@@ -45,11 +44,19 @@ const Albums = () => {
       getalbumsListRequest({
         quickFilter,
         filter: { sortBy, page },
-        keyword: "",
-        count: pagelimit,
+        keyword: postsearchResponse || "",
+        count: "",
       })
     );
-  }, [putalbumsLoading, postalbumsLoading, page, pagelimit, sortBy]);
+  }, [
+    putalbumsLoading,
+    postalbumsLoading,
+    page,
+    pagelimit,
+    sortBy,
+    postsearchResponse,
+  ]);
+
   return (
     <div className="album-container">
       <div className="album-header">
@@ -99,10 +106,17 @@ const Albums = () => {
         {getalbumsResponse?.data?.data?.length > 0 ? (
           getalbumsResponse?.data?.data?.map((each, index) => {
             return (
-              <div key={index} className="album-card">
+              <div
+                key={index}
+                className="album-card"
+                onClick={() => navigate(`/albums/edit/${each?._id}`)}
+              >
                 <div className="album-thumbnail">
-                  {each.thumbnail ? (
-                    <img src={each?.thumbnail} alt={each?.name} />
+                  {each.thumbnail?.image ? (
+                    <img
+                      src={appUrl + each.thumbnail?.image}
+                      alt={each?.name}
+                    />
                   ) : (
                     <span>No items</span>
                   )}
