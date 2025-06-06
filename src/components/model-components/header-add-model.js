@@ -16,6 +16,8 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useDispatch } from "react-redux";
+import { postphotosRequest } from "../../Redux/Photos/PhotosActions";
 
 export default function PhotoMenu() {
   const fileInputRef = React.useRef(null);
@@ -23,6 +25,8 @@ export default function PhotoMenu() {
   const handleClick = () => {
     fileInputRef.current.click();
   };
+
+  const dispatch = useDispatch();
 
   const handleFileChange = async (event) => {
     const files = event.target.files;
@@ -35,17 +39,19 @@ export default function PhotoMenu() {
       formData.append("image", files[i]);
     }
 
-    try {
-      const response = await fetch("http://localhost:5000/photos", {
-        method: "POST",
-        body: formData,
-      });
+    dispatch(postphotosRequest(formData));
 
-      const result = await response.json();
-      console.log("Upload successful:", result);
-    } catch (error) {
-      console.error("Upload failed:", error);
-    }
+    // try {
+    //   const response = await fetch("http://localhost:5000/photos", {
+    //     method: "POST",
+    //     body: formData,
+    //   });
+
+    //   const result = await response.json();
+    //   console.log("Upload successful:", result);
+    // } catch (error) {
+    //   console.error("Upload failed:", error);
+    // }
   };
 
   const handleMenuItemClick = () => {

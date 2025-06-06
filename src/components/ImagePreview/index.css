@@ -1,0 +1,28 @@
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.photo {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.preview-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}

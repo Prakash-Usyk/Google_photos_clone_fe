@@ -138,14 +138,24 @@ const Sidebar = () => {
             <LockedIcon width={24} height={24} />
             <p>Locked Folder</p>
           </li>
-          <li className="sidebar-menu-items" onClick={() => navigate("trash")}>
+          <li
+            className={`sidebar-menu-items ${
+              currentPath === "trash" ? "selected-cls" : ""
+            }`}
+            onClick={() => navigate("trash")}
+          >
             <TrashIcon width={24} height={24} />
             <p>Trash</p>
           </li>
         </div>
         <div className="line-cls"></div>
 
-        <li className="sidebar-menu-items" onClick={() => navigate("storage")}>
+        <li
+          className={`sidebar-menu-items ${
+            currentPath === "storage" ? "selected-cls" : ""
+          }`}
+          onClick={() => navigate("storage")}
+        >
           <StorageIcon width={24} height={24} />
           <p>Storage</p>
         </li>

@@ -12,14 +12,23 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import PhotoMenu from "../model-components/header-add-model";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(false);
 
   const handleClick = (event) => setAnchorEl(true);
   const handleClose = () => setAnchorEl(false);
+
+  const { postphotosResponse } = useSelector((state) => state.photos);
+
+  useEffect(() => {
+    if (!postphotosResponse) return;
+    handleClose();
+  }, [postphotosResponse]);
+
   return (
     <div>
       <Menu

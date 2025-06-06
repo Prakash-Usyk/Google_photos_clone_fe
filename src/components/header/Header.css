@@ -7,7 +7,6 @@
   background-color: var(--gm3-sys-color-surface-container, rgb(240, 244, 249));
 }
 
-
 .search-bar-wrapper {
   position: relative;
   width: 720px;
@@ -35,43 +34,37 @@
   pointer-events: none;
 }
 
-
-
 .avatar {
-      width: 32px;
-    height: 30px;
-  background-color: #0b8176; /* Teal-green color */
-  color: white;
-  font-weight: 500;
-  font-size: 20px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  background-color: #00897b; /* Teal-like Google color */
+  color: white;
+  font-weight: 600;
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Arial', sans-serif;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
-/* .header input {
-  flex: 1;
-  margin-right: 20px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  
-
-} */
+.round-profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
 
 .icons {
-  display: flex
-;
-    gap: 12px;
-    align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-.icons  :hover{
+.icons :hover {
   cursor: pointer;
 }
-
-
 
 .icons span {
   margin-left: 15px;
