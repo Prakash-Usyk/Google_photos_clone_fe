@@ -8,6 +8,7 @@ import {
 } from "../../Redux/Photos/PhotosActions";
 import { appUrl } from "../../utils/axios";
 import toast from "react-hot-toast";
+import PhotoGallery from "../../components/ImagePreview";
 
 const Photos = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,19 @@ const Photos = () => {
   const [pagelimit, setPagelimit] = useState(10);
   const [quickFilter, setQuickFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  const handleImageClick = (imgId) => {
+    setSelectedImage(imgId);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage("");
+  };
 
   const {
     getphotosLoading,
@@ -44,7 +58,6 @@ const Photos = () => {
   }, [putphotosLoading, postphotosLoading, page, pagelimit, sortBy]);
 
   useEffect(() => {
-    console.log(postphotosResponse, "messssss", postphotosResponse?.data);
     if (!postphotosResponse) return;
 
     if (postphotosResponse?.type === "success") {
@@ -62,13 +75,28 @@ const Photos = () => {
         {getphotosResponse?.data?.data?.length > 0 ? (
           getphotosResponse?.data?.data?.map((each, index) => {
             return (
-              <img key={index} src={appUrl + "/" + each.image} alt="snap" />
+              <img
+                key={index}
+                src={appUrl + each.image}
+                alt="snap"
+                onClick={() => handleImageClick(each?._id)}
+              />
             );
           })
         ) : (
           <></>
         )}
       </div>
+      {console.log(open, selectedImage, "checkingggg")}
+      <PhotoGallery
+        open={open}
+        selectedImage={selectedImage}
+        handleClose={handleClose}
+        images={getphotosResponse?.data?.data?.map((each, index) => ({
+          _id: each?._id,
+          image: appUrl + each.image,
+        }))}
+      />
     </div>
   );
 };

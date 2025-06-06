@@ -93,3 +93,9 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #909090;
 }
 
+.body-section{
+  background: var(--gm3-sys-color-background, rgb(255, 255, 255));
+  border-radius: 16px;
+  height: 100%;
+}
+

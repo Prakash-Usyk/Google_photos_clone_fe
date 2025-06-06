@@ -1,0 +1,126 @@
+.album-container {
+  padding: 9px;
+  font-family: Arial, sans-serif;
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 20px; */
+  padding: 8px;
+    border-bottom: 1px solid var(--gm3-sys-color-outline-variant, rgb(196, 199, 197));
+
+}
+
+.album-header h2  {
+  color: var(--gm3-sys-color-on-surface, rgb(31, 31, 31));
+    overflow: hidden;
+    flex-shrink: 0;
+    line-height: 1.75rem;
+    font-size: 1.375rem;
+    letter-spacing: 0em;
+    font-weight: 400;
+    
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  border: none;           
+  padding: 6px 10px;       
+  cursor: pointer;
+  color: #202124;  
+  /* margin-top: 20px;         */
+}
+
+.icon-button .material-icons {
+  font-size: 20px;
+}
+
+.add-alb-cls{
+    display: flex;
+    align-items: center;
+}
+
+.header-actions{
+    display: flex;
+    gap:10px;
+}
+
+
+
+.album-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.album-filters button {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.album-filters .active {
+  background: #e0f0ff;
+  color: #0366d6;
+  font-weight: bold;
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.album-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  background: white;
+
+}
+
+.album-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.album-thumbnail {
+  background: #f4f6f8;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.album-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-info {
+  padding: 10px;
+}
+
+.album-info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.album-info p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #666;
+}

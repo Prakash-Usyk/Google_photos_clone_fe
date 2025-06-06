@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 20px;
-  background-color: white;
-  background-color: var(--gm3-sys-color-surface-container, rgb(240, 244, 249));
+  padding: 8px 16px 8px 3px; 
+  background-color: var(--gm3-sys-color-surface-container, #f0f4f9);
 }
+
 
 .search-bar-wrapper {
   position: relative;
