@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getalbumsByIdRequest,
-  getalbumsListRequest,
-} from "../../Redux/Albums/AlbumsActions";
+import { getalbumsListRequest } from "../../Redux/Albums/AlbumsActions";
 import { appUrl } from "../../utils/axios";
 
 const Albums = () => {
@@ -18,19 +13,12 @@ const Albums = () => {
   const [quickFilter, setQuickFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [albumstate, setalbumstate] = useState("all");
-  const [selectedAlbum, setselectedAlbum] = useState("");
 
   const {
-    getalbumsLoading,
     getalbumsResponse,
-    getalbumsByidLoading,
-    getalbumsByidResponse,
+
     postalbumsLoading,
-    postalbumsResponse,
     putalbumsLoading,
-    putalbumsResponse,
-    deletealbumsLoading,
-    deletealbumsResponse,
   } = useSelector((state) => state.albums);
 
   const { getsearchResponse, postsearchResponse } = useSelector(

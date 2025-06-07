@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./photos.css";
 import {
-  deletephotosRequest,
-  deletephotosResponseClear,
   getphotosListRequest,
   postphotosResponseClear,
   putphotosRequest,
@@ -39,10 +37,7 @@ const Photos = () => {
   };
 
   const {
-    getphotosLoading,
     getphotosResponse,
-    getphotosByidLoading,
-    getphotosByidResponse,
     postphotosLoading,
     postphotosResponse,
     putphotosLoading,

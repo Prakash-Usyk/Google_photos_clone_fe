@@ -4,7 +4,6 @@ import "./index.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getalbumsByIdRequest,
   postalbumsRequest,
   postalbumsResponseClear,
   putalbumsRequest,
@@ -26,12 +25,6 @@ import {
   getphotosAlbumMappingListRequest,
 } from "../../../Redux/PhotosAlbumMapping/PhotosAlbumMappingActions";
 import PhotoGallery from "../../../components/ImagePreview";
-
-const dummyImages = [
-  "https://via.placeholder.com/150",
-  "https://via.placeholder.com/160",
-  "https://via.placeholder.com/170",
-];
 
 export default function AlbumForm() {
   const navigate = useNavigate();

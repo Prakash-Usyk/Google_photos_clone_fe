@@ -13,7 +13,6 @@ import TrashIcon from "../../assets/icons/side-bar-trash";
 import UpdatesIcon from "../../assets/icons/side-bar-updates";
 import VideosIcon from "../../assets/icons/side-bar-videos";
 import "./Sidebar.css";
-import usePagination from "@mui/material/usePagination";
 
 const Sidebar = () => {
   const location = useLocation();
